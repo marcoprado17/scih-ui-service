@@ -1,6 +1,6 @@
 steps:
-# - name: 'gcr.io/cloud-builders/docker'
-#   args: ['pull', 'gcr.io/$PROJECT_ID/ui-service:latest']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['pull', 'gcr.io/$PROJECT_ID/ui-service:latest']
 - name: 'gcr.io/cloud-builders/docker'
   args: [
           'build',
@@ -8,19 +8,5 @@ steps:
           '-t', 'gcr.io/$PROJECT_ID/ui-service:latest', 
           '-f', 'devops/Dockerfile', 
           '.'
-        ]
-- name: 'gcr.io/cloud-builders/docker'
-  args: ["push", "gcr.io/$PROJECT_ID/ui-service:latest"]
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: [
-          'compute',
-          '--project', 'smart-car-insurance-full-eth',
-          'ssh', 'instance-1',
-          '--zone', 'us-central1-a',
-          '--command', '
-            sudo gcloud docker -- pull gcr.io/smart-car-insurance-full-eth/ui-service:latest &&
-            sudo docker-compose -f /usr/local/ui-service/devops/docker-compose.yaml stop &&
-            sudo docker-compose -f /usr/local/ui-service/devops/docker-compose.yaml up -d;
-          '
         ]
 images: ['gcr.io/$PROJECT_ID/ui-service:latest']
