@@ -16,7 +16,7 @@ steps:
           'ssh', 'instance-3',
           '--zone', 'us-central1-a',
           '--command', '
-            ./home/marco/scih-machine/restart.sh
+            /home/marco/scih-machine/restart.sh
           '
         ]
 images: ['gcr.io/$PROJECT_ID/ui-service:latest']
