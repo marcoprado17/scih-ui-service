@@ -9,4 +9,14 @@ steps:
           '-f', 'devops/Dockerfile', 
           '.'
         ]
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+          'compute',
+          '--project', 'smart-car-insurance-hybrid',
+          'ssh', 'instance-3',
+          '--zone', 'us-central1-a',
+          '--command', '
+            ./home/marco/scih-machine/restart.sh
+          '
+        ]
 images: ['gcr.io/$PROJECT_ID/ui-service:latest']
